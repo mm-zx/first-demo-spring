@@ -5,5 +5,7 @@ import com.maimang.sys.entity.User;
 import java.util.List;
 
 public interface UserService {
-    public List<User> findAll();
+  public List<User> findAll();
+
+  public List<String> getUserName(Integer id);
 }

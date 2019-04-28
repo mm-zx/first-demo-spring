@@ -2,7 +2,7 @@ package com.maimang.springProject;
 
 import com.maimang.sys.controller.HelloController;
 import com.maimang.sys.entity.User;
-import com.maimang.sys.mapper.UserRepository;
+import com.maimang.sys.mapper.UserMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,10 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -28,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class SpringProjectApplicationTests {
   private MockMvc mvc;
-  @Autowired private UserRepository userRepository;
+  @Autowired private UserMapper userMapper;
 
   @Before
   public void setUp() {
@@ -44,12 +40,8 @@ public class SpringProjectApplicationTests {
 
   @Test
   public void test() throws Exception {
-    List<User> userList = new ArrayList<>();
-    userList.add(new User("aa", "pwd","role","permission"));
-    userList.add(new User("bb", "pwd","role","permission"));
-    userList.add(new User("cc", "pwd","role","permission"));
-    userList.add(new User("dd", "pwd","role","permission"));
-    userRepository.saveAll(userList);
-    Assert.assertEquals(4, userRepository.findAll().size());
+    List<User> userList = userMapper.selectList(null);
+    Assert.assertEquals(4, userList.size());
+    userList.forEach(System.out::println);
   }
 }

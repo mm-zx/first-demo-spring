@@ -1,24 +1,27 @@
 package com.maimang.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
-@Entity
-@Table(name = "sys_user")
 @RequiredArgsConstructor
-public class User {
-  @Id @GeneratedValue private Long id;
-  @NonNull
-  private String userName;
-  @NonNull
-  private String password;
-  @NonNull
+@NoArgsConstructor
+@TableName("sys_user")
+public class User implements Serializable {
+
+  private static final long serialVersionUID = 1L;
+  private Long id;
+  @NonNull private String userName;
+  @NonNull private String password;
   private String role;
-  @NonNull
   private String permission;
-  @Transient private String notDb;
+  // 状态
+  @TableField(exist = false)
+  private String status;
 }
